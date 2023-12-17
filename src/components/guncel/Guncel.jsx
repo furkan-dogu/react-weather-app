@@ -1,18 +1,12 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
-
-import { BsClouds } from "react-icons/bs";
-import { IoRainyOutline } from "react-icons/io5";
-import { CiCloudSun } from "react-icons/ci";
-import { WiDayRainMix } from "react-icons/wi";
-import { RiMistLine } from "react-icons/ri";
 import { LuWaves } from "react-icons/lu";
 import { FiWind } from "react-icons/fi";
 import "./Guncel.css";
 
 const Guncel = ({ search }) => {
   const [data, setData] = useState({});
-  const [filterCity, setFilterCity] = useState("samsun");
+  const [filterCity, setFilterCity] = useState("");
 
   const getGuncel = useCallback(async () => {
     try {
@@ -43,24 +37,13 @@ const Guncel = ({ search }) => {
       ? name.replace("City of", "").trim()
       : name;
 
-  const iconApi = weather && weather.length > 0 ? weather[0].main : null;
+  const weatherIcon = weather && weather.length > 0 ? weather[0].icon : null;
 
-  const icon =
-    iconApi === "Rain" ? (
-      <IoRainyOutline />
-    ) : iconApi === "Clouds" ? (
-      <BsClouds />
-    ) : iconApi === "Clear" ? (
-      <CiCloudSun />
-    ) : iconApi === "Drizzle" ? (
-      <WiDayRainMix />
-    ) : iconApi === "Mist" ? (
-      <RiMistLine />
-    ) : null;
+  const weatherDescription = weather && weather.length > 0 ? weather[0]?.description : null;
 
   return (
     <div className="instant-weather">
-      <h1>Instant Weather</h1>
+      <h1 className="weather-title">Instant Weather</h1>
       <div className="weather">
         <div className="city-div">
           <h3 className="city">
@@ -73,12 +56,10 @@ const Guncel = ({ search }) => {
             <span>Longitude:</span> {coord?.lon}
           </p>
         </div>
-        {/* <div className="icon-div">
-        <span>{icon}</span>
-      </div> */}
         <div className="temp-div">
-          <span className="temp-icon">{icon}</span>
+          <img className="weather-icon" src={`https://openweathermap.org/img/w/${weatherIcon}.png`} alt="Weather Icon" />
           <div>
+            <p className="temp-desc">{weatherDescription}</p>
             <p className="temp">
               <span>Temp:</span> {Math.round(main?.temp)} °C
             </p>
