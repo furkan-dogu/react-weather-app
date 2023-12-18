@@ -9,3 +9,9 @@ body {
     background-color: lightgray;
 }
 
+.haftalik-h1 {
+    text-align: center;
+    color: gray;
+    text-transform: uppercase;
+    margin-top: 5rem;
+}

@@ -10,7 +10,7 @@ const Home = () => {
     <div>
         <Search search={search} setSearch={setSearch} />
         <Guncel search={search} />
-        <h1>Haftalık</h1>
+        <h1 className='haftalik-h1'>5-day weather forecast</h1>
         <Haftalik search={search} />
     </div>
   )

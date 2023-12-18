@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { LuWaves } from "react-icons/lu";
 import { FiWind } from "react-icons/fi";
-import "./Guncel.css";
+import GuncelStyle from "./Guncel.module.css";
 
 const Guncel = ({ search }) => {
   const [data, setData] = useState({});
@@ -42,45 +42,45 @@ const Guncel = ({ search }) => {
   const weatherDescription = weather && weather.length > 0 ? weather[0]?.description : null;
 
   return (
-    <div className="instant-weather">
-      <h1 className="weather-title">Instant Weather</h1>
-      <div className="weather">
-        <div className="city-div">
-          <h3 className="city">
+    <div className={GuncelStyle["instant-weather"]}>
+      <h1 className={GuncelStyle["weather-title"]}>Instant Weather</h1>
+      <div className={GuncelStyle["weather"]}>
+        <div className={GuncelStyle["city-div"]}>
+          <h3 className={GuncelStyle["city"]}>
             {cityName} {sys?.country}
           </h3>
-          <p className="lat">
+          <p className={GuncelStyle["lat"]}>
             <span>Latitude:</span> {coord?.lat}
           </p>
-          <p className="lon">
+          <p className={GuncelStyle["lon"]}>
             <span>Longitude:</span> {coord?.lon}
           </p>
         </div>
-        <div className="temp-div">
-          <img className="weather-icon" src={`https://openweathermap.org/img/w/${weatherIcon}.png`} alt="Weather Icon" />
+        <div className={GuncelStyle["temp-div"]}>
+          <img className={GuncelStyle["weather-icon"]} src={`https://openweathermap.org/img/w/${weatherIcon}.png`} alt="Weather Icon" />
           <div>
-            <p className="temp-desc">{weatherDescription}</p>
-            <p className="temp">
+            <p className={GuncelStyle["temp-desc"]}>{weatherDescription}</p>
+            <p className={GuncelStyle["temp"]}>
               <span>Temp:</span> {Math.round(main?.temp)} °C
             </p>
-            <p className="felt-temp">
+            <p className={GuncelStyle["felt-temp"]}>
               <span>Felt Temp:</span> {Math.round(main?.feels_like)}°C
             </p>
           </div>
         </div>
 
-        <div className="humidity-div">
-          <LuWaves className="partner-icon" />
+        <div className={GuncelStyle["humidity-div"]}>
+          <LuWaves className={GuncelStyle["partner-icon"]} />
           <div>
-            <p className="humidity">{main?.humidity}%</p>
-            <p className="partner">Humidity</p>
+            <p className={GuncelStyle["humidity"]}>{main?.humidity}%</p>
+            <p className={GuncelStyle["partner"]}>Humidity</p>
           </div>
         </div>
-        <div className="wind-div">
-          <FiWind className="partner-icon" />
+        <div className={GuncelStyle["wind-div"]}>
+          <FiWind className={GuncelStyle["partner-icon"]} />
           <div>
-            <p className="wind">{wind?.speed} km/h</p>
-            <p className="partner">Wind Speed</p>
+            <p className={GuncelStyle["wind"]}>{wind?.speed} km/h</p>
+            <p className={GuncelStyle["partner"]}>Wind Speed</p>
           </div>
         </div>
       </div>
