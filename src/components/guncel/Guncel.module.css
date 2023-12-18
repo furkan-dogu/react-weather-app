@@ -4,7 +4,8 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
-    background-color: gray;
+    background-color: transparent;
+    border: 1px solid;
     max-width: 1400px;
     width: 80%;
     padding: .5rem;
@@ -25,6 +26,7 @@
 
 .city {
     font-size: 1.2rem;
+    color: #FDB912;
 }
 
 .instant-weather span {
@@ -64,6 +66,10 @@
     .wind-div {
     justify-content: flex-start;
     }
+
+    .wind-div{
+        margin-left: .5rem;
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -81,5 +87,9 @@
     .humidity-div,
     .wind-div {
         flex-direction: column;
+    }
+
+    .wind-div{
+        margin-left: 0rem;
     }
 }

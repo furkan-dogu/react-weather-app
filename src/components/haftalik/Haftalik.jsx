@@ -1,12 +1,13 @@
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { LuWaves } from "react-icons/lu";
 import { FiWind } from "react-icons/fi";
+import { WiBarometer } from "react-icons/wi";
 import HaftalikStyle from "./Haftalik.module.css";
 
 const Haftalik = ({ search }) => {
-  const [btn, setBtn] = useState(false);
+  const [openItems, setOpenItems] = useState({});
   const [data, setData] = useState({});
   const [filterCity, setFilterCity] = useState("");
 
@@ -30,7 +31,14 @@ const Haftalik = ({ search }) => {
 
   const { list } = data;
 
-  // Aynı tarihi paylaşan verileri gruplamak için bir nesne oluştur
+  const toggleItem = (date) => {
+    setOpenItems((prevOpenItems) => {
+      const updatedOpenItems = { ...prevOpenItems };
+      updatedOpenItems[date] = !updatedOpenItems[date];
+      return updatedOpenItems;
+    });
+  };
+
   const groupedData = {};
   list &&
     list.forEach((item) => {
@@ -45,65 +53,67 @@ const Haftalik = ({ search }) => {
     <div className={HaftalikStyle["card-group"]}>
       {Object.entries(groupedData).map(([date, items]) => (
         <div key={date} className={HaftalikStyle.card}>
-          <div className={HaftalikStyle["ques-answer"]}>
+          <div className={HaftalikStyle["date"]}>
             <h2>{date}</h2>
             <button
               className={HaftalikStyle["btn-minus"]}
-              onClick={() => setBtn(!btn)}
+              onClick={() => toggleItem(date)}
             >
-              {btn ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              {openItems[date] ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </button>
           </div>
         
-          {items.map((item, index) => (
-            <div key={index} className={HaftalikStyle["card-des"]}>
-              <div>
-                <h3>{new Date(item.dt_txt).toLocaleTimeString("tr-TR")}</h3>
-              </div>
-              <div className={HaftalikStyle["weather"]}>
-                <img
-                  className={HaftalikStyle["weather-icon"]}
-                  src={`https://openweathermap.org/img/w/${item.weather[0]?.icon}.png`}
-                  alt="Weather Icon"
-                />
-                <div className={HaftalikStyle["weather-temp"]}>
-                  <p className={HaftalikStyle["weather-temp-des"]}>
-                    {item.weather[0]?.description}
-                  </p>
-                  <p>
-                    <span>Temp:</span> {Math.round(item.main?.temp)} °C
-                  </p>
-                  <p>
-                    <span>Felt Temp:</span> {Math.round(item.main?.feels_like)} °C
-                  </p>
-                </div>
-              </div>
+          {openItems[date] && (
+            <div>
+              {items.map((item, index) => (
+                <div key={index} className={HaftalikStyle["card-des"]}>
+                  <div className={HaftalikStyle["weather"]}>
+                    <img
+                      className={HaftalikStyle["weather-icon"]}
+                      src={`https://openweathermap.org/img/w/${item.weather[0]?.icon}.png`}
+                      alt="Weather Icon"
+                      />
+                    <div className={HaftalikStyle["weather-temp"]}>
+                      <h3>{new Date(item.dt_txt).toLocaleTimeString("tr-TR")}</h3>
+                      <p className={HaftalikStyle["weather-temp-des"]}>
+                        {item.weather[0]?.description}
+                      </p>
+                      <p>
+                        <span>Temp:</span> {Math.round(item.main?.temp)} °C
+                      </p>
+                      <p>
+                        <span>Felt Temp:</span> {Math.round(item.main?.feels_like)} °C
+                      </p>
+                    </div>
+                  </div>
 
-              <div className={HaftalikStyle["humidity-div"]}>
-                <LuWaves className={HaftalikStyle["partner-icon"]} />
-                <div>
-                  <p>{item.main?.humidity} %</p>
-                  <p>Humidity</p>
-                </div>
-              </div>
+                  <div className={HaftalikStyle["humidity-div"]}>
+                    <LuWaves className={HaftalikStyle["partner-icon"]} />
+                    <div>
+                      <p>{item.main?.humidity} %</p>
+                      <p>Humidity</p>
+                    </div>
+                  </div>
 
-              <div className={HaftalikStyle["wind-div"]}>
-                <FiWind className={HaftalikStyle["partner-icon"]} />
-                <div>
-                  <p>{item.wind?.speed} km/h</p>
-                  <p>Wind Speed</p>
-                </div>
-              </div>
+                  <div className={HaftalikStyle["wind-div"]}>
+                    <FiWind className={HaftalikStyle["partner-icon"]} />
+                    <div>
+                      <p>{item.wind?.speed} km/h</p>
+                      <p>Wind Speed</p>
+                    </div>
+                  </div>
 
-              <div className={HaftalikStyle["pressure-div"]}>
-                <LuWaves className={HaftalikStyle["partner-icon"]} />
-                <div>
-                  <p>{item.main?.pressure} hPa</p>
-                  <p>Pressure</p>
+                  <div className={HaftalikStyle["pressure-div"]}>
+                    <WiBarometer className={HaftalikStyle["partner-icon"]} />
+                    <div>
+                      <p>{item.main?.pressure} hPa</p>
+                      <p>Pressure</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       ))}
     </div>

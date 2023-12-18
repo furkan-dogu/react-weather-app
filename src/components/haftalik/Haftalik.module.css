@@ -2,21 +2,26 @@
     width: 80%;
     margin: 2rem auto;
     max-width: 1400px;
+    color: #A90432;
+}
+
+.card-group h2,
+.card-group h3 {
+    color: #FDB912;
 }
 
 .card{ 
-    background-color: gray;
+    background-color: transparent;
     border-radius: 10px;
-    padding: 2rem;
+    padding: 1.2rem;
     margin: 1rem auto;
-    box-shadow: 0 0 5px black ;
+    box-shadow: 0 0 5px white;
     width: 100%;
-    color: aliceblue;
+    color: whitesmoke;
 }
 
-.ques-answer{
+.date{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
@@ -25,15 +30,18 @@ button {
     border: none;
     outline: none;
     background-color: transparent;
-    color: white;
+    color: #A90432;
     font-size: 1.5rem;
 }
 
 .card-des {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    margin: 2rem 0;
+    margin: 1rem 0;
+    box-shadow: 0 0 2px white;
+    border-radius: 10px;
+    padding: .5rem;
 }
 
 .wind-div,
@@ -57,4 +65,29 @@ button {
 
 .partner-icon {
     font-size: 2rem;
+}
+
+@media screen and (max-width:992px) {
+    .card-des {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        /* margin: 5rem 0; */
+    }
+}
+
+@media screen and (max-width:768px) {
+    .card-des {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: .5rem;
+    }
+
+    .weather,
+    .temp-div,
+    .humidity-div,
+    .pressure-div,
+    .wind-div {
+        flex-direction: column;
+    }
+
 }

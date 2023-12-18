@@ -10,7 +10,7 @@ const Home = () => {
     <div>
         <Search search={search} setSearch={setSearch} />
         <Guncel search={search} />
-        <h1 className='haftalik-h1'>5-day weather forecast</h1>
+        <h1 className='haftalik-h1'>5 Day / 3 Hour Forecast</h1>
         <Haftalik search={search} />
     </div>
   )
