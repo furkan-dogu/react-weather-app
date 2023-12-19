@@ -53,11 +53,11 @@ const Haftalik = ({ search }) => {
     <div className={HaftalikStyle["card-group"]}>
       {Object.entries(groupedData).map(([date, items]) => (
         <div key={date} className={HaftalikStyle.card}>
-          <div className={HaftalikStyle["date"]}>
+          <div className={HaftalikStyle["date"]} onClick={() => toggleItem(date)}>
             <h2>{date}</h2>
             <button
               className={HaftalikStyle["btn-minus"]}
-              onClick={() => toggleItem(date)}
+              
             >
               {openItems[date] ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </button>
