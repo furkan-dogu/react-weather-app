@@ -71,7 +71,11 @@ button {
     .card-des {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-        /* margin: 5rem 0; */
+    }
+
+    .wind-div{
+        margin-left: -1.2rem;
+        gap: 1rem;
     }
 }
 
@@ -88,6 +92,11 @@ button {
     .pressure-div,
     .wind-div {
         flex-direction: column;
+    }
+
+    .wind-div{
+        margin-left: 0;
+        gap: 0.5rem;
     }
 
 }
