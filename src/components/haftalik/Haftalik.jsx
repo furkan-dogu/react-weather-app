@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { LuWaves } from "react-icons/lu";
@@ -11,7 +11,7 @@ const Haftalik = ({ search }) => {
   const [data, setData] = useState({});
   const [filterCity, setFilterCity] = useState("");
 
-  const getHaftalik = useCallback(async () => {
+  const getHaftalik = async () => {
     try {
       const url = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${filterCity || "samsun"}&appid=${process.env.REACT_APP_API_KEY}`;
       const res = await axios.get(url);
@@ -19,7 +19,7 @@ const Haftalik = ({ search }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [filterCity]);
+  };
 
   useEffect(() => {
     setFilterCity(search);
@@ -27,18 +27,22 @@ const Haftalik = ({ search }) => {
 
   useEffect(() => {
     getHaftalik();
-  }, [filterCity, getHaftalik]);
+  }, [filterCity]);
 
   const { list } = data;
 
+  //! Fonksiyon bu tarihe bağlı öğenin durumunu değiştirir. 
+  //! Eğer bu tarih önceki nesnede varsa, durumu tersine çevirir; yoksa, yeni bir anahtar oluşturur ve bu anahtara ilişkin değeri true olarak ayarlar.
   const toggleItem = (date) => {
-    setOpenItems((prevOpenItems) => {
-      const updatedOpenItems = { ...prevOpenItems };
+    setOpenItems((item) => {
+      const updatedOpenItems = { ...item };
       updatedOpenItems[date] = !updatedOpenItems[date];
       return updatedOpenItems;
     });
   };
 
+  //! Bu işlem, tüm list dizisi öğeleri üzerinde tamamlandıktan sonra, groupedData nesnesinin içinde tarih anahtarlarına sahip dizileri içeren bir gruplanmış veri yapısı elde edilir.
+  //! Bu yapı, her bir tarih anahtarı altında o tarihe ait öğelerin bir listesini içerir.
   const groupedData = {};
   list &&
     list.forEach((item) => {
@@ -50,14 +54,15 @@ const Haftalik = ({ search }) => {
     });
 
   return (
+    //% Object.entries(groupedData).map(([date, items]) => ...) ifadesi, groupedData nesnesinin her bir anahtar-değer çifti için bir döngü oluşturur. 
+    //% Her bir çift, bir tarih (date) ve o tarihe ait öğelerin bir dizisi (items) olarak alınır.
     <div className={HaftalikStyle["card-group"]}>
       {Object.entries(groupedData).map(([date, items]) => (
-        <div key={date} className={HaftalikStyle.card}>
+        <div key={date} className={HaftalikStyle["card"]}>
           <div className={HaftalikStyle["date"]} onClick={() => toggleItem(date)}>
             <h2>{date}</h2>
             <button
-              className={HaftalikStyle["btn-minus"]}
-              
+              className={HaftalikStyle["btn-minus"]}             
             >
               {openItems[date] ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </button>
