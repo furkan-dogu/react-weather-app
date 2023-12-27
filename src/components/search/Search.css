@@ -6,11 +6,12 @@
     position: relative;
     width: 100%;
     max-width: 500px;
+    position: relative;
 }
 
 .input {
     width: 80%;
-    padding: 1rem 1.5rem;
+    padding: 1rem 2.5rem 1rem 1.5rem;
     border-radius: 25px;
     border: none;
     outline: none;
@@ -22,4 +23,11 @@
 .input::placeholder {
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
+}
+
+.btn {
+    position: absolute;
+    right: 13%;
+    top: 10px;
+    color: whitesmoke;
 }

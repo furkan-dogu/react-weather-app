@@ -1,35 +1,14 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { LuWaves } from "react-icons/lu";
 import { FiWind } from "react-icons/fi";
 import { WiBarometer } from "react-icons/wi";
 import HaftalikStyle from "./Haftalik.module.css";
 
-const Haftalik = ({ search }) => {
+const Haftalik = ({ haftalikData }) => {
   const [openItems, setOpenItems] = useState({});
-  const [data, setData] = useState({});
-  const [filterCity, setFilterCity] = useState("");
 
-  const getHaftalik = async () => {
-    try {
-      const url = `https://api.openweathermap.org/data/2.5/forecast?units=metric&q=${filterCity || "samsun"}&appid=${process.env.REACT_APP_API_KEY}`;
-      const res = await axios.get(url);
-      setData(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    setFilterCity(search);
-  }, [search]);
-
-  useEffect(() => {
-    getHaftalik();
-  }, [filterCity]);
-
-  const { list } = data;
+  const { list } = haftalikData;
 
   //! Fonksiyon bu tarihe bağlı öğenin durumunu değiştirir. 
   //! Eğer bu tarih önceki nesnede varsa, durumu tersine çevirir; yoksa, yeni bir anahtar oluşturur ve bu anahtara ilişkin değeri true olarak ayarlar.

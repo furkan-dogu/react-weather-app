@@ -1,34 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { LuWaves } from "react-icons/lu";
 import { FiWind } from "react-icons/fi";
 import GuncelStyle from "./Guncel.module.css";
 
-const Guncel = ({ search }) => {
-  const [data, setData] = useState({});
-  const [filterCity, setFilterCity] = useState("");
+const Guncel = ({ guncelData }) => {
 
-  const getGuncel = async () => {
-    try {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${
-        filterCity || "samsun"
-      }&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
-      const res = await axios.get(url);
-      setData(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    setFilterCity(search);
-  }, [search]);
-
-  useEffect(() => {
-    getGuncel();
-  }, [filterCity]);
-
-  const { main, name, sys, wind, coord, weather } = data;
+  const { main, name, sys, wind, coord, weather } = guncelData;
 
   const cityName =
     name && name.includes("Province")
