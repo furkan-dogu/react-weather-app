@@ -68,7 +68,8 @@
     }
 
     .wind-div{
-        margin-left: .5rem;
+        margin-left: .7rem;
+        gap: .9rem;
     }
 }
 
@@ -91,5 +92,6 @@
 
     .wind-div{
         margin-left: 0rem;
+        gap: .5rem;
     }
 }

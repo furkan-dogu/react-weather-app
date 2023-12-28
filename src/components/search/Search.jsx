@@ -1,14 +1,23 @@
 import "./Search.css"
 import { FaSearch } from "react-icons/fa";
+import { IoLocationSharp } from "react-icons/io5";
 
-const Search = ({search,setSearch,getGuncel,getHaftalik}) => {
+const Search = ({search,setSearch,getGuncel,getHaftalik,guncelData}) => {
   const handleSubmit = (e) => {
     e.preventDefault()
-    getGuncel()
-    getHaftalik()
+    if (search.trim() !== "") {
+      getGuncel();
+      getHaftalik();
+    }
   }
+
+  const handleClick = () => {
+    window.open(`https://openweathermap.org/city/${guncelData.id}`, "_blank");
+  }
+
   return (
     <form className="input-div" onSubmit={handleSubmit}>
+      <span className="search-location" onClick={handleClick}><IoLocationSharp /></span>
       <input
         className="input"
         type="text"

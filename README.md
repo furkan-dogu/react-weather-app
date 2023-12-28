@@ -17,6 +17,8 @@ This project, created with React, is a website that utilizes the OpenWeatherMap 
 - Instant and weekly weather forecast for a specific location.
 - Each day can be expanded to view detailed weather information.
 - Shows information such as temperature, felt temperature, humidity, wind speed, and pressure.
+- When the location button is clicked, it redirects to the [OpenWeatherMap](https://openweathermap.org/) page containing information about the entered location.
+- It provides a warning when an invalid location is entered
 
 ## Technologies Used
 
@@ -25,6 +27,7 @@ This project, created with React, is a website that utilizes the OpenWeatherMap 
 - [OpenWeatherMap API](https://openweathermap.org/) for weather data
 - Icons from [React Icons](https://react-icons.github.io/react-icons/)
 - Styling with CSS (module)
+- Sweetalert2 for alert 
 
 ## Project Skeleton
 
