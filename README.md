@@ -8,6 +8,14 @@
 
 This project, created with React, is a website that utilizes the OpenWeatherMap API to display both weekly and real-time weather forecasts for any desired location.
 
+## Table of Contents
+
+- [Features](#features)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Project Skeleton](#project-skeleton)
+- [Screenshots](#screenshots)
+
 ## Live Demo
 
 [React Weather App](https://react-weather-app-omega-pink.vercel.app/)
@@ -19,6 +27,10 @@ This project, created with React, is a website that utilizes the OpenWeatherMap 
 - Shows information such as temperature, felt temperature, humidity, wind speed, and pressure.
 - When the location button is clicked, it redirects to the [OpenWeatherMap](https://openweathermap.org/) page containing information about the entered location.
 - It provides a warning when an invalid location is entered
+
+## Usage
+
+- Get an API key from [OpenWeatherMap](https://openweathermap.org/) and replace process.env.REACT_APP_API_KEY in Guncel.jsx and Haftalik.jsx with your API key.
 
 ## Technologies Used
 
@@ -71,10 +83,6 @@ SOLUTION
 ## Compatibility
 
 The project is compatible with both wide-screen computers and mobile devices.
-
-## Usage
-
-- Get an API key from [OpenWeatherMap](https://openweathermap.org/) and replace process.env.REACT_APP_API_KEY in Guncel.jsx and Haftalik.jsx with your API key.
 
 ## Acknowledgments
 
